@@ -1,3 +1,4 @@
+
 {
 	"FileVersion": 3,
 	"EngineAssociation": "5.5",
@@ -17,7 +18,9 @@
 			"SupportedTargetPlatforms": [
 				"Win64",
 				"Linux",
-				"Android"
+				"Android",
+				"VisionOS"
+                "MacOs"
 			]
 		}
 	]
