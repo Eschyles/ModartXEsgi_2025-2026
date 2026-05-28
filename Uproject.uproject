@@ -20,6 +20,10 @@
 				"Android",
 				"VisionOS"
 			]
+		},
+		{
+			"Name": "Water",
+			"Enabled": true
 		}
 	]
 }
