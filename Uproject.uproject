@@ -26,6 +26,13 @@
 				"Linux",
 				"Android"
 			]
+		},
+		{
+			"Name": "PythonScriptPlugin",
+			"Enabled": true,
+			"TargetAllowList": [
+				"Editor"
+			]
 		}
 	]
 }

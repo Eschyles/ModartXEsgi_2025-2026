@@ -1,0 +1,63 @@
+// Helper functions for a city searchlight / lighthouse beam material.
+// Include from a Material Custom node:
+// #include "/Project/City/CitySweepBeam.ush"
+
+#pragma once
+
+float CitySweepBeamClipMask(float BeamAxis01, float BeamLength, float BeamClipDistance, float BeamClipFadeDistance)
+{
+	float SafeLength = max(BeamLength, 1.0);
+	float DistanceAlongBeam = saturate(BeamAxis01) * SafeLength;
+	float SafeFade = max(BeamClipFadeDistance, 1.0);
+	float ClipStart = max(0.0, BeamClipDistance - SafeFade * 0.35);
+	float ClipEnd = BeamClipDistance + SafeFade * 0.65;
+	return 1.0 - smoothstep(ClipStart, ClipEnd, DistanceAlongBeam);
+}
+
+float CitySweepBeamWorldDistance(float3 WorldPosition, float3 BeamWorldOrigin, float3 BeamWorldDirection)
+{
+	float3 BeamDir = BeamWorldDirection;
+	float DirLength = max(length(BeamDir), 0.001);
+	BeamDir /= DirLength;
+	return dot(WorldPosition - BeamWorldOrigin, BeamDir);
+}
+
+float CitySweepBeamSoftEdge(float2 ConeUV, float EdgePower)
+{
+	float2 Centered = ConeUV * 2.0 - 1.0;
+	float Radial = saturate(length(Centered));
+	return pow(saturate(1.0 - Radial), max(0.1, EdgePower));
+}
+
+float CitySweepBeamOpacity(
+	float2 ConeUV,
+	float BeamAxis01,
+	float BeamOpacity,
+	float BeamLength,
+	float BeamClipDistance,
+	float BeamClipFadeDistance,
+	float EdgePower)
+{
+	float ClipMask = CitySweepBeamClipMask(BeamAxis01, BeamLength, BeamClipDistance, BeamClipFadeDistance);
+	float SoftEdge = CitySweepBeamSoftEdge(ConeUV, EdgePower);
+	float DistanceFade = lerp(1.0, 0.74, smoothstep(0.25, 1.0, saturate(BeamAxis01)));
+	return BeamOpacity * ClipMask * saturate(SoftEdge * 0.55 + 0.45) * DistanceFade;
+}
+
+float CitySweepBeamWorldOpacity(
+	float2 ConeUV,
+	float3 WorldPosition,
+	float3 BeamWorldOrigin,
+	float3 BeamWorldDirection,
+	float BeamOpacity,
+	float BeamLength,
+	float BeamClipDistance,
+	float BeamClipFadeDistance,
+	float EdgePower)
+{
+	float SafeLength = max(BeamLength, 1.0);
+	float WorldDistance = CitySweepBeamWorldDistance(WorldPosition, BeamWorldOrigin, BeamWorldDirection);
+	float BeamAxis01 = saturate(WorldDistance / SafeLength);
+	float OriginMask = smoothstep(-200.0, 300.0, WorldDistance);
+	return OriginMask * CitySweepBeamOpacity(ConeUV, BeamAxis01, BeamOpacity, BeamLength, BeamClipDistance, BeamClipFadeDistance, EdgePower);
+}
