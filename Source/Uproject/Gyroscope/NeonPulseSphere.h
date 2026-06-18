@@ -80,6 +80,9 @@ protected:
 	bool bAutoEnableInput = true;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Neon|General")
+	bool bWaitForFirstInputToStart = true;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Neon|General")
 	bool bAutoAdvanceStates = false;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Neon|General")
@@ -176,6 +179,7 @@ private:
 	float BaseScale = 1.0f;
 
 	bool bRevealTriggeredThisVanish = false;
+	bool bHasStarted = false;
 	int32 NextMannequinRevealIndex = 0;
 
 	FVector InitialLocation = FVector::ZeroVector;

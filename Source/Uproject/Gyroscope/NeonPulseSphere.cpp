@@ -67,6 +67,7 @@ void ANeonPulseSphere::BeginPlay()
 	PulseTime = 0.0f;
 
 	bRevealTriggeredThisVanish = false;
+	bHasStarted = !bWaitForFirstInputToStart;
 	NextMannequinRevealIndex = 0;
 	ActiveMannequinMoves.Empty();
 
@@ -106,26 +107,29 @@ void ANeonPulseSphere::Tick(float DeltaTime)
 	StateTime += DeltaTime;
 	PulseTime += DeltaTime;
 
-	switch (CurrentState)
+	if (bHasStarted)
 	{
-	case ENeonSphereState::Grow:
-		UpdateGrowState(DeltaTime);
-		break;
+		switch (CurrentState)
+		{
+		case ENeonSphereState::Grow:
+			UpdateGrowState(DeltaTime);
+			break;
 
-	case ENeonSphereState::Move:
-		UpdateMoveState(DeltaTime);
-		break;
+		case ENeonSphereState::Move:
+			UpdateMoveState(DeltaTime);
+			break;
 
-	case ENeonSphereState::MovedPulse:
-		UpdateMovedPulseState(DeltaTime);
-		break;
+		case ENeonSphereState::MovedPulse:
+			UpdateMovedPulseState(DeltaTime);
+			break;
 
-	case ENeonSphereState::Vanish:
-		UpdateVanishState(DeltaTime);
-		break;
+		case ENeonSphereState::Vanish:
+			UpdateVanishState(DeltaTime);
+			break;
 
-	default:
-		break;
+		default:
+			break;
+		}
 	}
 
 	UpdateActiveMannequinMoves(DeltaTime);
@@ -134,6 +138,13 @@ void ANeonPulseSphere::Tick(float DeltaTime)
 
 void ANeonPulseSphere::GoToNextState()
 {
+	if (!bHasStarted)
+	{
+		bHasStarted = true;
+		EnterState(CurrentState);
+		return;
+	}
+
 	if (CurrentState == ENeonSphereState::Grow)
 	{
 		EnterState(ENeonSphereState::Move);
@@ -162,6 +173,7 @@ void ANeonPulseSphere::GoToNextState()
 
 		BaseScale = StartBaseScale;
 		PulseTime = 0.0f;
+		bHasStarted = true;
 
 		SetMaterialScalar(OpacityParameterName, 1.0f);
 		SetMaterialScalar(EmissionStrengthParameterName, NormalEmissionStrength);
