@@ -1,5 +1,6 @@
 ﻿#include "StatusMaterialSequencer.h"
 
+#include "../Rhythm/RhythmTransitionStateSubsystem.h"
 #include "Components/MeshComponent.h"
 #include "Components/InputComponent.h"
 #include "GameFramework/PlayerController.h"
@@ -10,6 +11,7 @@ AStatusMaterialSequencer::AStatusMaterialSequencer()
 	PrimaryActorTick.bCanEverTick = true;
 	PrimaryActorTick.bStartWithTickEnabled = true;
 
+	bEnableKeyboardToggle = false;
 	ToggleKey = EKeys::H;
 }
 
@@ -38,6 +40,23 @@ void AStatusMaterialSequencer::BeginPlay()
 			}
 		}
 	}
+
+	if (bStartOnLevelBeginPlay)
+	{
+		ScheduleStatusSequenceStart(LevelBeginPlayStartDelay, TEXT("level BeginPlay"));
+	}
+
+	TryStartFromRhythmTransition();
+}
+
+void AStatusMaterialSequencer::EndPlay(const EEndPlayReason::Type EndPlayReason)
+{
+	if (UWorld* World = GetWorld())
+	{
+		World->GetTimerManager().ClearTimer(RhythmTransitionStartTimerHandle);
+	}
+
+	Super::EndPlay(EndPlayReason);
 }
 
 void AStatusMaterialSequencer::Tick(float DeltaTime)
@@ -57,8 +76,67 @@ bool AStatusMaterialSequencer::ShouldTickIfViewportsOnly() const
 }
 #endif
 
+void AStatusMaterialSequencer::ScheduleStatusSequenceStart(float DelaySec, const TCHAR* Reason)
+{
+	UWorld* World = GetWorld();
+	if (!World)
+	{
+		return;
+	}
+
+	UE_LOG(LogTemp, Log, TEXT("[%s] Scheduling status sequence start from %s after %.2f sec."), *GetName(), Reason, DelaySec);
+
+	World->GetTimerManager().ClearTimer(RhythmTransitionStartTimerHandle);
+
+	if (DelaySec <= 0.0f)
+	{
+		StartStatusSequence();
+		return;
+	}
+
+	World->GetTimerManager().SetTimer(
+		RhythmTransitionStartTimerHandle,
+		this,
+		&AStatusMaterialSequencer::StartStatusSequence,
+		DelaySec,
+		false);
+}
+
+void AStatusMaterialSequencer::TryStartFromRhythmTransition()
+{
+	if (!bStartWhenRhythmTransitionPending)
+	{
+		UE_LOG(LogTemp, Verbose, TEXT("[%s] Rhythm transition auto-start skipped: checkbox disabled."), *GetName());
+		return;
+	}
+
+	UWorld* World = GetWorld();
+	if (!World)
+	{
+		return;
+	}
+
+	UGameInstance* GameInstance = World->GetGameInstance();
+	if (!GameInstance)
+	{
+		return;
+	}
+
+	URhythmTransitionStateSubsystem* TransitionState = GameInstance->GetSubsystem<URhythmTransitionStateSubsystem>();
+	if (!TransitionState || !TransitionState->ConsumeStatusSequencerRequest())
+	{
+		UE_LOG(LogTemp, Warning, TEXT("[%s] Rhythm transition auto-start checked, but no pending rhythm transition request was found."), *GetName());
+		return;
+	}
+
+	UE_LOG(LogTemp, Log, TEXT("[%s] Auto-starting status sequence from rhythm level transition."), *GetName());
+	ScheduleStatusSequenceStart(RhythmTransitionStartDelay, TEXT("rhythm transition"));
+}
+
 void AStatusMaterialSequencer::StartStatusSequence()
 {
+	UE_LOG(LogTemp, Log, TEXT("[%s] Starting status material sequence. Steps=%d"), *GetName(), StatusSteps.Num());
+
 	// Si on avait déjà joué une séquence, on remet proprement les matériaux de base
 	if (bOriginalsCached)
 	{

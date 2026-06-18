@@ -3,6 +3,7 @@
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
 #include "InputCoreTypes.h"
+#include "TimerManager.h"
 #include "StatusMaterialSequencer.generated.h"
 
 class UMeshComponent;
@@ -85,6 +86,7 @@ public:
 
 protected:
 	virtual void BeginPlay() override;
+	virtual void EndPlay(const EEndPlayReason::Type EndPlayReason) override;
 	virtual void Tick(float DeltaTime) override;
 
 #if WITH_EDITOR
@@ -108,9 +110,21 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Status Sequencer")
 	bool bPreviewTickInEditor = true;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Status Sequencer")
+	bool bStartOnLevelBeginPlay = false;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Status Sequencer", meta = (EditCondition = "bStartOnLevelBeginPlay", ClampMin = "0.0"))
+	float LevelBeginPlayStartDelay = 0.2f;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Status Sequencer")
+	bool bStartWhenRhythmTransitionPending = false;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Status Sequencer", meta = (EditCondition = "bStartWhenRhythmTransitionPending", ClampMin = "0.0"))
+	float RhythmTransitionStartDelay = 0.2f;
+
 	// Active le toggle clavier
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Input")
-	bool bEnableKeyboardToggle = true;
+	bool bEnableKeyboardToggle = false;
 
 	// Touche de test
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Input")
@@ -143,9 +157,12 @@ private:
 	bool bSequenceIsPlaying = false;
 
 	float SequenceElapsedTime = 0.0f;
+	FTimerHandle RhythmTransitionStartTimerHandle;
 
 private:
 	void UpdateSequence(float DeltaTime);
+	void ScheduleStatusSequenceStart(float DelaySec, const TCHAR* Reason);
+	void TryStartFromRhythmTransition();
 
 	void ActivateStep(int32 StepIndex);
 	void ApplyPreActivationVisibility();

@@ -8,6 +8,7 @@
 
 class ARhythmButtonActor;
 class ARhythmNoteActor;
+class AStatusMaterialSequencer;
 class UAudioComponent;
 class UBoxComponent;
 class UInputAction;
@@ -112,6 +113,21 @@ public:
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Song|Sequence")
 	bool bSequenceGateUnlocked = false;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Rhythm|Level Transition")
+	bool bOpenLevelOnRhythmPassed = false;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Rhythm|Level Transition", meta = (EditCondition = "bOpenLevelOnRhythmPassed"))
+	FName LevelToOpenOnRhythmPassed = NAME_None;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Rhythm|Level Transition", meta = (EditCondition = "bOpenLevelOnRhythmPassed", ClampMin = "0.0"))
+	float OpenLevelDelaySec = 0.75f;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Rhythm|Level Transition")
+	TArray<TObjectPtr<AStatusMaterialSequencer>> StatusSequencersToStartOnRhythmPassed;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Rhythm|Level Transition")
+	bool bStartStatusSequencersWhenOpenedLevelLoads = true;
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Actors")
 	TSubclassOf<ARhythmNoteActor> NoteActorClass;
@@ -391,7 +407,9 @@ private:
 	bool bRunning = false;
 	bool bSequenceActive = false;
 	bool bTriggerAlreadyUsed = false;
+	bool bTriggerNeedsExitBeforeRestart = false;
 	FTimerHandle StartNextSequenceSongTimerHandle;
+	FTimerHandle OpenPassedLevelTimerHandle;
 
 	void SetupInput();
 	void TeardownInput();
@@ -399,6 +417,10 @@ private:
 	void StartSequenceSongAtIndex(int32 SongIndex);
 	void StartNextSequenceSong();
 	void HandleSequenceSongFinished(const FRhythmScoreStats& FinishedStats);
+	void HandleRhythmGatePassed();
+	void StartPassedStatusSequencers();
+	void ScheduleOpenPassedLevel();
+	void OpenPassedLevel();
 	bool TryStartSongSequenceFromTriggerActor(AActor* OtherActor);
 	UFUNCTION()
 	void CheckInitialTriggerOverlaps();

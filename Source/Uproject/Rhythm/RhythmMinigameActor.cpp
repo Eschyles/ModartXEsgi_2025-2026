@@ -7,6 +7,8 @@
 #include "RhythmButtonActor.h"
 #include "RhythmNoteActor.h"
 #include "RhythmSongData.h"
+#include "RhythmTransitionStateSubsystem.h"
+#include "../Gyroscope/StatusMaterialSequencer.h"
 #include "Components/AudioComponent.h"
 #include "Components/BoxComponent.h"
 #include "Components/InputComponent.h"
@@ -17,6 +19,7 @@
 #include "Engine/LocalPlayer.h"
 #include "Engine/StaticMesh.h"
 #include "GameFramework/PlayerController.h"
+#include "Kismet/GameplayStatics.h"
 #include "Materials/MaterialInterface.h"
 #include "Sound/SoundBase.h"
 #include "TimerManager.h"
@@ -118,6 +121,13 @@ void ARhythmMinigameActor::BeginPlay()
 {
 	Super::BeginPlay();
 
+	UE_LOG(LogTemp, Log, TEXT("[%s] Rhythm minigame C++ sequence patch loaded. SongSequence=%d SpawnOnBeginPlay=%s StartSequenceOnBeginPlay=%s TriggerStart=%s"),
+		*GetName(),
+		SongSequence.Num(),
+		bSpawnOnBeginPlay ? TEXT("true") : TEXT("false"),
+		bStartSongSequenceOnBeginPlay ? TEXT("true") : TEXT("false"),
+		bStartSongSequenceOnTriggerOverlap ? TEXT("true") : TEXT("false"));
+
 	if (TriggerVolumeComponent)
 	{
 		TriggerVolumeComponent->SetCollisionEnabled(ECollisionEnabled::NoCollision);
@@ -154,6 +164,7 @@ void ARhythmMinigameActor::EndPlay(const EEndPlayReason::Type EndPlayReason)
 	if (GetWorld())
 	{
 		GetWorld()->GetTimerManager().ClearTimer(StartNextSequenceSongTimerHandle);
+		GetWorld()->GetTimerManager().ClearTimer(OpenPassedLevelTimerHandle);
 	}
 	TeardownInput();
 	DestroyRuntimeActors();
@@ -185,6 +196,7 @@ void ARhythmMinigameActor::StartMinigame(URhythmSongData* InOverrideSongData)
 	if (GetWorld())
 	{
 		GetWorld()->GetTimerManager().ClearTimer(StartNextSequenceSongTimerHandle);
+		GetWorld()->GetTimerManager().ClearTimer(OpenPassedLevelTimerHandle);
 	}
 
 	StartSongInternal(InOverrideSongData);
@@ -192,9 +204,16 @@ void ARhythmMinigameActor::StartMinigame(URhythmSongData* InOverrideSongData)
 
 void ARhythmMinigameActor::StartSongSequence()
 {
+	UE_LOG(LogTemp, Log, TEXT("[%s] StartSongSequence called. SongSequence=%d Override=%s SongData=%s"),
+		*GetName(),
+		SongSequence.Num(),
+		*GetNameSafe(OverrideSongData.Get()),
+		*GetNameSafe(SongData.Get()));
+
 	if (SongSequence.Num() == 0)
 	{
 		bSequenceActive = false;
+		UE_LOG(LogTemp, Warning, TEXT("[%s] SongSequence is empty, falling back to single song mode. Fill Song Sequence with both tracks."), *GetName());
 		if (!StartSongInternal(OverrideSongData))
 		{
 			OnRhythmGateFailed.Broadcast();
@@ -205,6 +224,7 @@ void ARhythmMinigameActor::StartSongSequence()
 	if (GetWorld())
 	{
 		GetWorld()->GetTimerManager().ClearTimer(StartNextSequenceSongTimerHandle);
+		GetWorld()->GetTimerManager().ClearTimer(OpenPassedLevelTimerHandle);
 	}
 
 	bSequenceActive = true;
@@ -225,6 +245,7 @@ void ARhythmMinigameActor::ResetSongSequenceProgress()
 	bSequenceActive = false;
 	bSequenceGateUnlocked = false;
 	bTriggerAlreadyUsed = false;
+	bTriggerNeedsExitBeforeRestart = false;
 	CurrentSequenceSongIndex = INDEX_NONE;
 	PassedSequenceSongCount = 0;
 	CompletedSequenceStats.Reset();
@@ -261,6 +282,14 @@ bool ARhythmMinigameActor::StartSongInternal(URhythmSongData* InSongData)
 	if (!ActiveSongData->GetSortedNotes(SortedNotes, Error))
 	{
 		LastStartError = FString::Printf(TEXT("Could not start rhythm minigame: %s"), *Error);
+		UE_LOG(LogTemp, Warning, TEXT("%s"), *LastStartError);
+		RefreshHologramScreen();
+		return false;
+	}
+
+	if (SortedNotes.Num() == 0)
+	{
+		LastStartError = FString::Printf(TEXT("Could not start rhythm minigame: %s has no notes. Check the NoteTable/DataTable import."), *GetNameSafe(ActiveSongData));
 		UE_LOG(LogTemp, Warning, TEXT("%s"), *LastStartError);
 		RefreshHologramScreen();
 		return false;
@@ -313,6 +342,12 @@ void ARhythmMinigameActor::StartSequenceSongAtIndex(int32 SongIndex)
 	}
 
 	CurrentSequenceSongIndex = SongIndex;
+	UE_LOG(LogTemp, Log, TEXT("[%s] Rhythm sequence starting track %d/%d: %s"),
+		*GetName(),
+		SongIndex + 1,
+		SongSequence.Num(),
+		*GetNameSafe(SongSequence[SongIndex].Get()));
+
 	if (!StartSongInternal(SongSequence[SongIndex].Get()))
 	{
 		bSequenceActive = false;
@@ -335,6 +370,14 @@ void ARhythmMinigameActor::HandleSequenceSongFinished(const FRhythmScoreStats& F
 
 	const int32 FinishedSongIndex = CurrentSequenceSongIndex;
 	CompletedSequenceStats.Add(FinishedStats);
+	UE_LOG(LogTemp, Log, TEXT("[%s] Rhythm sequence finished track %d/%d. Passed=%s Accuracy=%.2f Threshold=%.2f ActiveSong=%s"),
+		*GetName(),
+		FinishedSongIndex + 1,
+		SongSequence.Num(),
+		FinishedStats.bPassed ? TEXT("true") : TEXT("false"),
+		FinishedStats.Accuracy,
+		PassAccuracyThreshold,
+		*GetNameSafe(ActiveSongData.Get()));
 
 	if (!FinishedStats.bPassed)
 	{
@@ -354,11 +397,8 @@ void ARhythmMinigameActor::HandleSequenceSongFinished(const FRhythmScoreStats& F
 	if (PassedSequenceSongCount >= SongSequence.Num())
 	{
 		bSequenceActive = false;
-		bSequenceGateUnlocked = true;
 		CurrentSequenceSongIndex = INDEX_NONE;
-		RefreshScoreText();
-		RefreshHologramScreen();
-		OnRhythmPassed.Broadcast();
+		HandleRhythmGatePassed();
 		return;
 	}
 
@@ -366,19 +406,99 @@ void ARhythmMinigameActor::HandleSequenceSongFinished(const FRhythmScoreStats& F
 	RefreshScoreText();
 	RefreshHologramScreen();
 
-	if (GetWorld() && DelayBetweenSequenceSongsSec > 0.0f)
+	UE_LOG(LogTemp, Log, TEXT("[%s] Rhythm sequence advancing immediately to track %d/%d."),
+		*GetName(),
+		CurrentSequenceSongIndex + 1,
+		SongSequence.Num());
+	StartNextSequenceSong();
+}
+
+void ARhythmMinigameActor::HandleRhythmGatePassed()
+{
+	bSequenceGateUnlocked = true;
+	RefreshScoreText();
+	RefreshHologramScreen();
+	UE_LOG(LogTemp, Log, TEXT("[%s] Rhythm gate passed. OpenLevel=%s Level=%s Delay=%.2f"),
+		*GetName(),
+		bOpenLevelOnRhythmPassed ? TEXT("true") : TEXT("false"),
+		*LevelToOpenOnRhythmPassed.ToString(),
+		OpenLevelDelaySec);
+	StartPassedStatusSequencers();
+	OnRhythmPassed.Broadcast();
+	ScheduleOpenPassedLevel();
+}
+
+void ARhythmMinigameActor::StartPassedStatusSequencers()
+{
+	for (AStatusMaterialSequencer* Sequencer : StatusSequencersToStartOnRhythmPassed)
 	{
-		GetWorld()->GetTimerManager().SetTimer(
-			StartNextSequenceSongTimerHandle,
-			this,
-			&ARhythmMinigameActor::StartNextSequenceSong,
-			DelayBetweenSequenceSongsSec,
-			false);
+		if (!Sequencer)
+		{
+			continue;
+		}
+
+		UE_LOG(LogTemp, Log, TEXT("[%s] Starting status material sequencer on rhythm pass: %s"), *GetName(), *Sequencer->GetName());
+		Sequencer->StartStatusSequence();
 	}
-	else
+}
+
+void ARhythmMinigameActor::ScheduleOpenPassedLevel()
+{
+	if (!bOpenLevelOnRhythmPassed)
 	{
-		StartNextSequenceSong();
+		UE_LOG(LogTemp, Warning, TEXT("[%s] Rhythm gate passed but Open Level On Rhythm Passed is unchecked."), *GetName());
+		return;
 	}
+
+	if (LevelToOpenOnRhythmPassed.IsNone())
+	{
+		UE_LOG(LogTemp, Warning, TEXT("[%s] Rhythm gate passed but Level To Open On Rhythm Passed is empty."), *GetName());
+		return;
+	}
+
+	if (bStartStatusSequencersWhenOpenedLevelLoads)
+	{
+		if (UWorld* World = GetWorld())
+		{
+			if (UGameInstance* GameInstance = World->GetGameInstance())
+			{
+				if (URhythmTransitionStateSubsystem* TransitionState = GameInstance->GetSubsystem<URhythmTransitionStateSubsystem>())
+				{
+					TransitionState->RequestStatusSequencersOnNextLevel();
+					UE_LOG(LogTemp, Log, TEXT("[%s] Requested destination level status sequencer auto-start."), *GetName());
+				}
+			}
+		}
+	}
+
+	if (!GetWorld())
+	{
+		return;
+	}
+
+	if (OpenLevelDelaySec <= 0.0f)
+	{
+		OpenPassedLevel();
+		return;
+	}
+
+	GetWorld()->GetTimerManager().SetTimer(
+		OpenPassedLevelTimerHandle,
+		this,
+		&ARhythmMinigameActor::OpenPassedLevel,
+		OpenLevelDelaySec,
+		false);
+}
+
+void ARhythmMinigameActor::OpenPassedLevel()
+{
+	if (LevelToOpenOnRhythmPassed.IsNone())
+	{
+		return;
+	}
+
+	UE_LOG(LogTemp, Log, TEXT("[%s] Opening rhythm passed level: %s"), *GetName(), *LevelToOpenOnRhythmPassed.ToString());
+	UGameplayStatics::OpenLevel(this, LevelToOpenOnRhythmPassed);
 }
 
 bool ARhythmMinigameActor::TryStartSongSequenceFromTriggerActor(AActor* OtherActor)
@@ -405,10 +525,14 @@ bool ARhythmMinigameActor::TryStartSongSequenceFromTriggerActor(AActor* OtherAct
 	LastTriggerActorName = OtherActor->GetFName();
 	if (bLogTriggerAttempts)
 	{
-		UE_LOG(LogTemp, Log, TEXT("Rhythm trigger starting sequence from actor %s."), *OtherActor->GetName());
+		UE_LOG(LogTemp, Log, TEXT("[%s] Rhythm trigger starting sequence from actor %s. SongSequence=%d"),
+			*GetName(),
+			*OtherActor->GetName(),
+			SongSequence.Num());
 	}
 
 	bTriggerAlreadyUsed = true;
+	bTriggerNeedsExitBeforeRestart = true;
 	StartSongSequence();
 	return true;
 }
@@ -436,20 +560,33 @@ void ARhythmMinigameActor::PollTriggerVolumeForPlayer()
 		return;
 	}
 
+	bool bInsideTrigger = false;
 	AActor* Pawn = PlayerController->GetPawn();
 	if (Pawn && IsWorldLocationInsideTrigger(Pawn->GetActorLocation()))
 	{
-		TryStartSongSequenceFromTriggerActor(Pawn);
-		return;
+		bInsideTrigger = true;
 	}
 
 	FVector ViewLocation = FVector::ZeroVector;
 	FRotator ViewRotation = FRotator::ZeroRotator;
 	PlayerController->GetPlayerViewPoint(ViewLocation, ViewRotation);
-	if (IsWorldLocationInsideTrigger(ViewLocation))
+	if (!bInsideTrigger && IsWorldLocationInsideTrigger(ViewLocation))
 	{
-		TryStartSongSequenceFromTriggerActor(Pawn ? Pawn : PlayerController);
+		bInsideTrigger = true;
 	}
+
+	if (!bInsideTrigger)
+	{
+		bTriggerNeedsExitBeforeRestart = false;
+		return;
+	}
+
+	if (bTriggerNeedsExitBeforeRestart)
+	{
+		return;
+	}
+
+	TryStartSongSequenceFromTriggerActor(Pawn ? Pawn : PlayerController);
 }
 
 bool ARhythmMinigameActor::IsWorldLocationInsideTrigger(const FVector& WorldLocation) const
@@ -889,13 +1026,26 @@ void ARhythmMinigameActor::FinishMinigame()
 	RecalculateStats();
 	ScoreStats.bPassed = ScoreStats.Accuracy >= PassAccuracyThreshold;
 	const FRhythmScoreStats FinishedStats = ScoreStats;
+	const bool bWasSequenceActive = bSequenceActive;
+	const int32 FinishedSequenceSongIndex = CurrentSequenceSongIndex;
 	StopMinigame(false);
-	OnMinigameFinished.Broadcast(FinishedStats);
 
-	if (bSequenceActive)
+	if (bWasSequenceActive)
 	{
+		bSequenceActive = true;
+		CurrentSequenceSongIndex = FinishedSequenceSongIndex;
 		HandleSequenceSongFinished(FinishedStats);
 	}
+	else if (FinishedStats.bPassed)
+	{
+		HandleRhythmGatePassed();
+	}
+	else
+	{
+		OnRhythmGateFailed.Broadcast();
+	}
+
+	OnMinigameFinished.Broadcast(FinishedStats);
 }
 
 ERhythmHitRating ARhythmMinigameActor::ResolveActiveNote(int32 LaneIndex, float& OutTimingErrorSec)
