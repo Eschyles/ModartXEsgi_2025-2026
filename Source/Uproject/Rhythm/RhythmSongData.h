@@ -8,7 +8,7 @@
 class UDataTable;
 class USoundBase;
 
-UCLASS(BlueprintType)
+UCLASS(BlueprintType, Blueprintable, DisplayName = "Rhythm Song Data")
 class UPROJECT_API URhythmSongData : public UPrimaryDataAsset
 {
 	GENERATED_BODY()

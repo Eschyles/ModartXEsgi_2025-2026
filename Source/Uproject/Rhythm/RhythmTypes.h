@@ -28,6 +28,9 @@ struct UPROJECT_API FRhythmNoteRow : public FTableRowBase
 	float DurationSec = 0.0f;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Rhythm")
+	int32 Velocity = 0;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Rhythm")
 	float Pitch = 1.0f;
 };
 

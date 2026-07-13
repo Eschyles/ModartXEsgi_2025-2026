@@ -2,15 +2,19 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
+#include "InputCoreTypes.h"
 #include "RhythmTypes.h"
 #include "RhythmMinigameActor.generated.h"
 
 class ARhythmButtonActor;
 class ARhythmNoteActor;
+class AStatusMaterialSequencer;
 class UAudioComponent;
+class UBoxComponent;
 class UInputAction;
 class UInputMappingContext;
 class UMaterialInterface;
+class UPrimitiveComponent;
 class UStaticMesh;
 class UStaticMeshComponent;
 class USplineComponent;
@@ -19,6 +23,7 @@ class URhythmSongData;
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE(FRhythmGameEventSignature);
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FRhythmGameFinishedSignature, FRhythmScoreStats, Stats);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FRhythmSequenceTrackSignature, int32, TrackIndex, FRhythmScoreStats, Stats);
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_FourParams(FRhythmNoteJudgedSignature, int32, LaneIndex, ERhythmHitRating, Rating, float, TimingErrorSec, FRhythmScoreStats, Stats);
 
 UCLASS(Blueprintable)
@@ -40,6 +45,18 @@ public:
 	UPROPERTY(BlueprintAssignable, Category = "Rhythm")
 	FRhythmGameFinishedSignature OnMinigameFinished;
 
+	UPROPERTY(BlueprintAssignable, Category = "Rhythm|Gate")
+	FRhythmGameEventSignature OnRhythmPassed;
+
+	UPROPERTY(BlueprintAssignable, Category = "Rhythm|Gate")
+	FRhythmGameEventSignature OnRhythmGateFailed;
+
+	UPROPERTY(BlueprintAssignable, Category = "Rhythm|Gate")
+	FRhythmSequenceTrackSignature OnRhythmTrackPassed;
+
+	UPROPERTY(BlueprintAssignable, Category = "Rhythm|Gate")
+	FRhythmSequenceTrackSignature OnRhythmTrackFailed;
+
 	UPROPERTY(BlueprintAssignable, Category = "Rhythm")
 	FRhythmNoteJudgedSignature OnNoteJudged;
 
@@ -51,6 +68,9 @@ public:
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Components")
 	TObjectPtr<UAudioComponent> AudioComponent = nullptr;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Components")
+	TObjectPtr<UBoxComponent> TriggerVolumeComponent = nullptr;
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Components")
 	TObjectPtr<UTextRenderComponent> ScoreTextComponent = nullptr;
@@ -78,6 +98,36 @@ public:
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Song")
 	TObjectPtr<URhythmSongData> OverrideSongData = nullptr;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Song|Sequence")
+	TArray<TObjectPtr<URhythmSongData>> SongSequence;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Song|Sequence")
+	TArray<FRhythmScoreStats> CompletedSequenceStats;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Song|Sequence")
+	int32 CurrentSequenceSongIndex = INDEX_NONE;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Song|Sequence")
+	int32 PassedSequenceSongCount = 0;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Song|Sequence")
+	bool bSequenceGateUnlocked = false;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Rhythm|Level Transition")
+	bool bOpenLevelOnRhythmPassed = false;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Rhythm|Level Transition", meta = (EditCondition = "bOpenLevelOnRhythmPassed"))
+	FName LevelToOpenOnRhythmPassed = NAME_None;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Rhythm|Level Transition", meta = (EditCondition = "bOpenLevelOnRhythmPassed", ClampMin = "0.0"))
+	float OpenLevelDelaySec = 0.75f;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Rhythm|Level Transition")
+	TArray<TObjectPtr<AStatusMaterialSequencer>> StatusSequencersToStartOnRhythmPassed;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Rhythm|Level Transition")
+	bool bStartStatusSequencersWhenOpenedLevelLoads = true;
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Actors")
 	TSubclassOf<ARhythmNoteActor> NoteActorClass;
@@ -125,6 +175,15 @@ public:
 	float LaneSpacing = 160.0f;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Layout")
+	bool bInvertLaneSides = false;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Layout")
+	bool bUseSplineEndsForNoteTravel = true;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Layout")
+	bool bSpawnNotesAtSplineEnd = true;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Layout")
 	float SpawnDistanceAlongSpline = 1500.0f;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Layout")
@@ -132,6 +191,12 @@ public:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Layout")
 	float NoteHeightOffset = 80.0f;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Layout")
+	float ButtonHeightOffset = 80.0f;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Layout")
+	float ButtonDistanceOffsetAlongSpline = 0.0f;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Layout")
 	float TrackHeightOffset = 0.0f;
@@ -158,7 +223,37 @@ public:
 	bool bSpawnOnBeginPlay = false;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Runtime")
+	bool bStartSongSequenceOnBeginPlay = false;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Runtime")
 	bool bDestroySpawnedActorsOnStop = true;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Trigger")
+	bool bStartSongSequenceOnTriggerOverlap = true;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Trigger")
+	bool bCheckInitialTriggerOverlapsOnBeginPlay = true;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Trigger")
+	bool bPollTriggerVolumeForPlayer = true;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Trigger")
+	bool bTriggerOnlyOnce = false;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Trigger")
+	FName RequiredTriggerActorTag = NAME_None;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Trigger")
+	bool bLogTriggerAttempts = true;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Rhythm|Debug")
+	FString LastStartError;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Rhythm|Debug")
+	FName LastTriggerActorName = NAME_None;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Song|Sequence", meta = (ClampMin = "0.0"))
+	float DelayBetweenSequenceSongsSec = 1.0f;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Visual")
 	FLinearColor PerfectColor = FLinearColor(0.0f, 1.0f, 0.8f);
@@ -256,8 +351,26 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Input")
 	int32 RhythmInputPriority = 0;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Input")
+	bool bEnableFallbackKeyboardInput = true;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Input")
+	FKey Lane0FallbackKey;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Input")
+	FKey Lane1FallbackKey;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Input")
+	FKey Lane2FallbackKey;
+
 	UFUNCTION(BlueprintCallable, Category = "Rhythm")
 	void StartMinigame(URhythmSongData* InOverrideSongData);
+
+	UFUNCTION(BlueprintCallable, CallInEditor, Category = "Rhythm|Gate")
+	void StartSongSequence();
+
+	UFUNCTION(BlueprintCallable, CallInEditor, Category = "Rhythm|Gate")
+	void ResetSongSequenceProgress();
 
 	UFUNCTION(BlueprintCallable, Category = "Rhythm")
 	void StopMinigame(bool bResetScore);
@@ -274,6 +387,9 @@ public:
 	UFUNCTION(BlueprintPure, Category = "Rhythm")
 	FRhythmScoreStats GetScoreStats() const;
 
+	UFUNCTION(BlueprintPure, Category = "Rhythm|Gate")
+	int32 GetRequiredSongCount() const;
+
 protected:
 	virtual void BeginPlay() override;
 	virtual void EndPlay(const EEndPlayReason::Type EndPlayReason) override;
@@ -289,9 +405,29 @@ private:
 	float CachedSongTimeSec = 0.0f;
 	int32 NextSpawnNoteIndex = 0;
 	bool bRunning = false;
+	bool bSequenceActive = false;
+	bool bTriggerAlreadyUsed = false;
+	bool bTriggerNeedsExitBeforeRestart = false;
+	FTimerHandle StartNextSequenceSongTimerHandle;
+	FTimerHandle OpenPassedLevelTimerHandle;
 
 	void SetupInput();
 	void TeardownInput();
+	bool StartSongInternal(URhythmSongData* InSongData);
+	void StartSequenceSongAtIndex(int32 SongIndex);
+	void StartNextSequenceSong();
+	void HandleSequenceSongFinished(const FRhythmScoreStats& FinishedStats);
+	void HandleRhythmGatePassed();
+	void StartPassedStatusSequencers();
+	void ScheduleOpenPassedLevel();
+	void OpenPassedLevel();
+	bool TryStartSongSequenceFromTriggerActor(AActor* OtherActor);
+	UFUNCTION()
+	void CheckInitialTriggerOverlaps();
+	UFUNCTION()
+	void HandleTriggerBeginOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
+	void PollTriggerVolumeForPlayer();
+	bool IsWorldLocationInsideTrigger(const FVector& WorldLocation) const;
 	void HandleLane0Action();
 	void HandleLane1Action();
 	void HandleLane2Action();
@@ -300,6 +436,12 @@ private:
 	void SpawnDueNotes();
 	void UpdateActiveNotes();
 	void UpdateTrackVisualPulse();
+	void UpdatePlayerFacingVisuals();
+	FTransform GetLaneTransformOnSpline(float DistanceAlongSpline, int32 LaneIndex, float HeightOffset) const;
+	float GetLaneOffset(int32 LaneIndex) const;
+	float GetSpawnDistanceOnSpline() const;
+	float GetHitDistanceOnSpline() const;
+	float GetSplineDistanceForConfiguredLocalX(float LocalX) const;
 	void FinishIfComplete();
 	void FinishMinigame();
 	ERhythmHitRating ResolveActiveNote(int32 LaneIndex, float& OutTimingErrorSec);

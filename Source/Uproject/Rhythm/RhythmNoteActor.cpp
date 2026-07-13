@@ -9,6 +9,7 @@
 ARhythmNoteActor::ARhythmNoteActor()
 {
 	PrimaryActorTick.bCanEverTick = false;
+	SetActorEnableCollision(false);
 
 	SceneRoot = CreateDefaultSubobject<USceneComponent>(TEXT("SceneRoot"));
 	SetRootComponent(SceneRoot);
@@ -16,6 +17,8 @@ ARhythmNoteActor::ARhythmNoteActor()
 	NoteMeshComponent = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("NoteMeshComponent"));
 	NoteMeshComponent->SetupAttachment(SceneRoot);
 	NoteMeshComponent->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+	NoteMeshComponent->SetCollisionResponseToAllChannels(ECR_Ignore);
+	NoteMeshComponent->SetGenerateOverlapEvents(false);
 
 	static ConstructorHelpers::FObjectFinder<UStaticMesh> CubeMesh(TEXT("/Engine/BasicShapes/Cube.Cube"));
 	if (CubeMesh.Succeeded())
@@ -31,6 +34,10 @@ void ARhythmNoteActor::BeginPlay()
 
 	if (NoteMeshComponent)
 	{
+		SetActorEnableCollision(false);
+		NoteMeshComponent->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+		NoteMeshComponent->SetCollisionResponseToAllChannels(ECR_Ignore);
+		NoteMeshComponent->SetGenerateOverlapEvents(false);
 		BaseMaterial = NoteMeshComponent->GetMaterial(0);
 	}
 }
@@ -41,6 +48,13 @@ void ARhythmNoteActor::ConfigureNote(int32 InLane, float InNoteTimeSec, float In
 	NoteTimeSec = InNoteTimeSec;
 	DurationSec = InDurationSec;
 	HitRating = ERhythmHitRating::None;
+	SetActorEnableCollision(false);
+	if (NoteMeshComponent)
+	{
+		NoteMeshComponent->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+		NoteMeshComponent->SetCollisionResponseToAllChannels(ECR_Ignore);
+		NoteMeshComponent->SetGenerateOverlapEvents(false);
+	}
 }
 
 void ARhythmNoteActor::UpdateTransformOnSpline(USplineComponent* Spline, float DistanceAlongSpline, float HeightOffset, float LaneSpacing)
