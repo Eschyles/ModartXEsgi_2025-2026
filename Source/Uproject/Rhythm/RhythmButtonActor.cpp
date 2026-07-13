@@ -9,13 +9,16 @@
 ARhythmButtonActor::ARhythmButtonActor()
 {
 	PrimaryActorTick.bCanEverTick = false;
+	SetActorEnableCollision(false);
 
 	SceneRoot = CreateDefaultSubobject<USceneComponent>(TEXT("SceneRoot"));
 	SetRootComponent(SceneRoot);
 
 	ButtonMeshComponent = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("ButtonMeshComponent"));
 	ButtonMeshComponent->SetupAttachment(SceneRoot);
-	ButtonMeshComponent->SetCollisionEnabled(ECollisionEnabled::QueryOnly);
+	ButtonMeshComponent->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+	ButtonMeshComponent->SetCollisionResponseToAllChannels(ECR_Ignore);
+	ButtonMeshComponent->SetGenerateOverlapEvents(false);
 
 	static ConstructorHelpers::FObjectFinder<UStaticMesh> CylinderMesh(TEXT("/Engine/BasicShapes/Cylinder.Cylinder"));
 	if (CylinderMesh.Succeeded())
@@ -31,6 +34,10 @@ void ARhythmButtonActor::BeginPlay()
 
 	if (ButtonMeshComponent)
 	{
+		SetActorEnableCollision(false);
+		ButtonMeshComponent->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+		ButtonMeshComponent->SetCollisionResponseToAllChannels(ECR_Ignore);
+		ButtonMeshComponent->SetGenerateOverlapEvents(false);
 		InitialMeshLocation = ButtonMeshComponent->GetRelativeLocation();
 		InitialMeshScale = ButtonMeshComponent->GetRelativeScale3D();
 	}
@@ -39,6 +46,13 @@ void ARhythmButtonActor::BeginPlay()
 void ARhythmButtonActor::ConfigureButton(int32 InLane, FLinearColor InColor)
 {
 	Lane = InLane;
+	SetActorEnableCollision(false);
+	if (ButtonMeshComponent)
+	{
+		ButtonMeshComponent->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+		ButtonMeshComponent->SetCollisionResponseToAllChannels(ECR_Ignore);
+		ButtonMeshComponent->SetGenerateOverlapEvents(false);
+	}
 	SetVisualColor(InColor);
 }
 
