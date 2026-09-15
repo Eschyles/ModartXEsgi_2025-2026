@@ -13,14 +13,50 @@
     <configurations />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5a708b38-d202-49ab-9a4e-104a63f0a01a" name="Changes" comment="" />
+    <list default="true" id="5a708b38-d202-49ab-9a4e-104a63f0a01a" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/Content/Assets/Mathiasprovot/BP_Text.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Assets/Mathiasprovot/BP_Text.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Assets/Mathiasprovot/Blueprint/BP_NeonPulseSphere.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Assets/Mathiasprovot/Blueprint/BP_NeonPulseSphere.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Assets/Mathiasprovot/Blueprint/MyRhythmMinigameActor.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Assets/Mathiasprovot/Blueprint/MyRhythmMinigameActor.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Assets/Mathiasprovot/Meshes/BERGHAIN/mesh/berghain_sol_.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Assets/Mathiasprovot/Meshes/BERGHAIN/mesh/berghain_sol_.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Assets/Mathiasprovot/Meshes/centraleelectrique/sm_rooftop_5_hd_jfg_scene_texturesattached/MM_LED2_Inst2.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Assets/Mathiasprovot/Meshes/centraleelectrique/sm_rooftop_5_hd_jfg_scene_texturesattached/MM_LED2_Inst2.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Assets/Mathiasprovot/Meshes/couloir/SOL.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Assets/Mathiasprovot/Meshes/couloir/SOL.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Assets/Mathiasprovot/RhythmGame/Charts/gameSong.csv" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Assets/Mathiasprovot/RhythmGame/Charts/gameSong.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Assets/Mathiasprovot/RhythmGame/Charts/gameSong.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Assets/Mathiasprovot/RhythmGame/Charts/gameSong.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Assets/Mathiasprovot/RhythmGame/Songs/GameSong.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Assets/Mathiasprovot/RhythmGame/Songs/GameSong.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Assets/Mathiasprovot/SILHOUETTES/LOOK5/tenu5blender.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Assets/Mathiasprovot/SILHOUETTES/LOOK5/tenu5blender.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Assets/Mathiasprovot/berghainseule.umap" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Assets/Mathiasprovot/berghainseule.umap" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Assets/Mathiasprovot/materials/MM_LED2.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Assets/Mathiasprovot/materials/MM_LED2.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/__ExternalActors__/Assets/Mathiasprovot/MathiasProvot3/1/VR/0EF8NBXI14SNYXF0FZECZ3.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/__ExternalActors__/Assets/Mathiasprovot/MathiasProvot3/1/VR/0EF8NBXI14SNYXF0FZECZ3.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/__ExternalActors__/Assets/Mathiasprovot/MathiasProvot3/9/3N/W2MS10YIL3QFRCP0EKGTW7.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/__ExternalActors__/Assets/Mathiasprovot/MathiasProvot3/9/3N/W2MS10YIL3QFRCP0EKGTW7.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/__ExternalActors__/Assets/Mathiasprovot/MathiasProvot3/A/EB/NLIJEQU1F5W91KKI6GH1NR.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/__ExternalActors__/Assets/Mathiasprovot/MathiasProvot3/A/EB/NLIJEQU1F5W91KKI6GH1NR.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Tools/Rhythm/Inbox/MIDI/gameSong.mid" beforeDir="false" afterPath="$PROJECT_DIR$/Tools/Rhythm/Inbox/MIDI/gameSong.mid" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="DpaMonitoringSettings">
+    <option name="firstShow" value="false" />
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
+  "lastFilter": {
+    "state": "OPEN",
+    "assignee": "Eschyles"
+  }
+}]]></component>
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/Eschyles/ModartXEsgi_2025-2026.git",
+    "accountId": "5986be5c-7176-44a0-8c80-fcbe234e4564"
+  }
+}]]></component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/../../../../../../Unreals/UE_5.6/Engine/Source/Runtime/CoreUObject/Public/UObject/UObjectBaseUtility.h" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/../../../../../../Unreals/UE_5.6/Engine/Source/Runtime/Engine/Classes/GameFramework/Actor.h" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="McpProjectServerCommands">
     <commands />
@@ -44,10 +80,11 @@
     "RunOnceActivity.git.unshallow": "true",
     "RunOnceActivity.readMode.enableVisualFormatting": "true",
     "RunOnceActivity.typescript.service.memoryLimit.init": "true",
+    "Uproject.Uproject.executor": "Run",
     "cidr.known.project.marker": "true",
     "codeWithMe.voiceChat.enabledByDefault": "false",
     "com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1": "true",
-    "git-widget-placeholder": "T5.62.0",
+    "git-widget-placeholder": "TempToFinal",
     "junie.onboarding.icon.badge.shown": "true",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
@@ -64,10 +101,10 @@
         <option name="CONFIGURATION" value="DebugGame Editor" />
         <option name="PLATFORM" value="Win64" />
         <option name="CURRENT_LAUNCH_PROFILE" value="Local" />
-        <option name="EXECUTABLE_PATH" value="C:/Program Files/Epic Games/UE_5.5/Engine/Binaries/Win64/UnrealEditor-Win64-DebugGame.exe" />
+        <option name="EXECUTABLE_PATH" value="$PROJECT_DIR$/../../../../../../Unreals/UE_5.6/Engine/Binaries/Win64/UnrealEditor-Win64-DebugGame.exe" />
         <option name="MANDATORY_PROGRAM_PARAMETERS" value=" &quot;D:\Travail\FREELANCE\Cours\2026\DFD5ESGIProjet\ModartXEsgi_2025-2026\Uproject.uproject&quot;" />
         <option name="CUSTOM_PROGRAM_PARAMETERS" value="" />
-        <option name="WORKING_DIRECTORY" value="C:/Program Files/Epic Games/UE_5.5" />
+        <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/../../../../../../Unreals/UE_5.6" />
         <option name="PASS_PARENT_ENVS" value="1" />
         <option name="USE_EXTERNAL_CONSOLE" value="1" />
         <option name="TERMINAL_INTERACTION_BEHAVIOR" value="FORCE_CONSOLE" />
@@ -93,7 +130,7 @@
         <option name="EXECUTABLE_PATH" value="$PROJECT_DIR$/Binaries/Win64/Uproject-Win64-DebugGame.exe" />
         <option name="MANDATORY_PROGRAM_PARAMETERS" value="" />
         <option name="CUSTOM_PROGRAM_PARAMETERS" value="" />
-        <option name="WORKING_DIRECTORY" value="C:/Program Files/Epic Games/UE_5.5" />
+        <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/../../../../../../Unreals/UE_5.6" />
         <option name="PASS_PARENT_ENVS" value="1" />
         <option name="USE_EXTERNAL_CONSOLE" value="1" />
         <option name="TERMINAL_INTERACTION_BEHAVIOR" value="FORCE_CONSOLE" />
@@ -103,10 +140,10 @@
         <option name="CONFIGURATION" value="Development Editor" />
         <option name="PLATFORM" value="Win64" />
         <option name="CURRENT_LAUNCH_PROFILE" value="Local" />
-        <option name="EXECUTABLE_PATH" value="C:/Program Files/Epic Games/UE_5.5/Engine/Binaries/Win64/UnrealEditor.exe" />
+        <option name="EXECUTABLE_PATH" value="$PROJECT_DIR$/../../../../../../Unreals/UE_5.6/Engine/Binaries/Win64/UnrealEditor.exe" />
         <option name="MANDATORY_PROGRAM_PARAMETERS" value=" &quot;D:\Travail\FREELANCE\Cours\2026\DFD5ESGIProjet\ModartXEsgi_2025-2026\Uproject.uproject&quot;" />
         <option name="CUSTOM_PROGRAM_PARAMETERS" value="" />
-        <option name="WORKING_DIRECTORY" value="C:/Program Files/Epic Games/UE_5.5" />
+        <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/../../../../../../Unreals/UE_5.6" />
         <option name="PASS_PARENT_ENVS" value="1" />
         <option name="USE_EXTERNAL_CONSOLE" value="1" />
         <option name="TERMINAL_INTERACTION_BEHAVIOR" value="FORCE_CONSOLE" />
@@ -132,7 +169,7 @@
         <option name="EXECUTABLE_PATH" value="$PROJECT_DIR$/Binaries/Win64/Uproject.exe" />
         <option name="MANDATORY_PROGRAM_PARAMETERS" value="" />
         <option name="CUSTOM_PROGRAM_PARAMETERS" value="" />
-        <option name="WORKING_DIRECTORY" value="C:/Program Files/Epic Games/UE_5.5" />
+        <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/../../../../../../Unreals/UE_5.6" />
         <option name="PASS_PARENT_ENVS" value="1" />
         <option name="USE_EXTERNAL_CONSOLE" value="1" />
         <option name="TERMINAL_INTERACTION_BEHAVIOR" value="FORCE_CONSOLE" />
@@ -158,7 +195,7 @@
         <option name="EXECUTABLE_PATH" value="$PROJECT_DIR$/Binaries/Win64/Uproject-Win64-Shipping.exe" />
         <option name="MANDATORY_PROGRAM_PARAMETERS" value="" />
         <option name="CUSTOM_PROGRAM_PARAMETERS" value="" />
-        <option name="WORKING_DIRECTORY" value="C:/Program Files/Epic Games/UE_5.5" />
+        <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/../../../../../../Unreals/UE_5.6" />
         <option name="PASS_PARENT_ENVS" value="1" />
         <option name="USE_EXTERNAL_CONSOLE" value="1" />
         <option name="TERMINAL_INTERACTION_BEHAVIOR" value="FORCE_CONSOLE" />
@@ -181,6 +218,7 @@
       <updated>1781611607807</updated>
       <workItem from="1781611612223" duration="2209000" />
       <workItem from="1781629746674" duration="37000" />
+      <workItem from="1787154003750" duration="11912000" />
     </task>
     <servers />
   </component>
