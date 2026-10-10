@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="NONE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="fd45af53-3595-46ed-aed2-c106457d9c55" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/Content/0_Commun/Blueprints/BP_GFirstPersonCharacter.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/0_Commun/Blueprints/BP_GFirstPersonCharacter.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/0_Commun/Blueprints/Input/IMC_Base.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/0_Commun/Blueprints/Input/IMC_Base.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Assets/ACH/Input/IMC_Inspect.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Assets/ACH/Input/IMC_Inspect.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Assets/Cyprien_GEORGES/IMC_Cyp.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Assets/Cyprien_GEORGES/IMC_Cyp.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Assets/Cyprien_GEORGES/Materials/MI_WAREHOUSE_PANEL.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Assets/Cyprien_GEORGES/Materials/MI_WAREHOUSE_ROOF.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Assets/Cyprien_GEORGES/Meshes/ALEMBIC/Textures/9D0D08EDD3FDC4B5346F240B0BC12B37.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Assets/Cyprien_GEORGES/Meshes/ALEMBIC/Textures/KIM_body_g.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Assets/Cyprien_GEORGES/Meshes/ALEMBIC/Textures/KIM_body_n.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Assets/Cyprien_GEORGES/Meshes/ALEMBIC/Textures/KIM_body_s.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Assets/Cyprien_GEORGES/Meshes/ALEMBIC/Textures/MI_KIM_BODY.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Assets/Cyprien_GEORGES/Meshes/ALEMBIC/Textures/MI_KIM_CORNEA.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Assets/Cyprien_GEORGES/Meshes/ALEMBIC/Textures/MI_KIM_EYES.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Assets/Cyprien_GEORGES/Meshes/ALEMBIC/Textures/MI_KIM_FACE.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Assets/Cyprien_GEORGES/Meshes/ALEMBIC/Textures/MI_KIM_HAIR.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Assets/Cyprien_GEORGES/Meshes/ALEMBIC/Textures/MI_KIM_LAMBERT.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Assets/Cyprien_GEORGES/Meshes/ALEMBIC/Textures/MI_KIM_LASHS.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Assets/Cyprien_GEORGES/Meshes/ALEMBIC/Textures/MI_KIM_TEARS.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Assets/Cyprien_GEORGES/Meshes/ALEMBIC/Textures/MI_KIM_TEETH.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Assets/Cyprien_GEORGES/Meshes/ALEMBIC/Textures/MI_KIM_TONGUE.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Assets/Cyprien_GEORGES/Meshes/ALEMBIC/Textures/MI_KIM_UNIFORM.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Assets/Cyprien_GEORGES/Meshes/HOODIE_MAGNETIQUE.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Assets/Cyprien_GEORGES/Meshes/PROPS/Electrical_Box_tdgecegda/High/tdgecegda_tier_1.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Assets/Cyprien_GEORGES/Meshes/PROPS/Electrical_Box_ujyqaelga/High/ujyqaelga_tier_1.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Assets/Cyprien_GEORGES/Meshes/PROPS/Exit_Sign/ExitSign_01_FBX.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Assets/Cyprien_GEORGES/Meshes/PROPS/Pallet_plastic_02/plastic_pallet2_fbx.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Assets/Cyprien_GEORGES/Meshes/PROPS/Wooden_Pallet_vh1icei/High/vh1icei_tier_1.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Assets/Cyprien_GEORGES/Meshes/VITRA_MUSEUM/VITRA_MUSEUM.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Assets/Cyprien_GEORGES/Meshes/WAREHOUSE/Textures/PANEL/panels06_diffuse.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Assets/Cyprien_GEORGES/Meshes/WAREHOUSE/Textures/PANEL/panels06_glossiness.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Assets/Cyprien_GEORGES/Meshes/WAREHOUSE/Textures/PANEL/panels06_normal_opengl.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Assets/Cyprien_GEORGES/Meshes/WAREHOUSE/Textures/PANEL/panels06_specular.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Assets/Cyprien_GEORGES/Meshes/WAREHOUSE/Textures/ROOF/metal04_normal_opengl.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Assets/Cyprien_GEORGES/Meshes/WAREHOUSE/Textures/ROOF/metal04_roughness.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Assets/Cyprien_GEORGES/Meshes/WAREHOUSE/Textures/ROOF/metal04b_diffuse.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Assets/KMI/IMC_Inventory.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Assets/KMI/IMC_Inventory.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Assets/Mathiasprovot/RhythmGame/IMC_RythmGame.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Assets/Mathiasprovot/RhythmGame/IMC_RythmGame.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Assets/Philippine/Input/IMC_DojoInputs.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Assets/Philippine/Input/IMC_DojoInputs.uasset" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ClangdSettings">
+    <option name="formatViaClangd" value="false" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectColorInfo"><![CDATA[{
+  "associatedIndex": 5
+}]]></component>
+  <component name="ProjectId" id="3KTrQFj6G2HDfwGJjdt3NuoF9m9" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.cidr.known.project.marker": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "RunOnceActivity.readMode.enableVisualFormatting": "true",
+    "cf.first.check.clang-format": "false",
+    "cidr.known.project.marker": "true",
+    "git-widget-placeholder": "TempToFinal",
+    "last_opened_file_path": "D:/Travail/FREELANCE/Cours/2026/DFD5ESGIProjet/ModartXEsgi_2025-2026",
+    "settings.editor.selected.configurable": "configurable.group.tools"
+  }
+}]]></component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="fd45af53-3595-46ed-aed2-c106457d9c55" name="Changes" comment="" />
+      <created>1791592381004</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1791592381004</updated>
+    </task>
+    <servers />
+  </component>
+</project>
