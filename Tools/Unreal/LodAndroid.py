@@ -30,7 +30,7 @@ FOLDERS = [
     "/Game/Assets/Charlotte_MJ/Meshes/Silhouettes",
     "/Game/Fab",
 ]
-DRY_RUN = True               # True = simulation, False = modifie vraiment les assets
+DRY_RUN = False          # True = simulation, False = modifie vraiment les assets
 LOD1_PERCENT = 0.45           # part des triangles gardée dans le LOD 1 (0.5 = 50 %)
 LOD1_SCREEN_SIZE = 0.35      # taille écran à partir de laquelle le LOD 1 prend le relais (PC)
 ANDROID_MIN_LOD = 1          # LOD minimum utilisé sur Android
