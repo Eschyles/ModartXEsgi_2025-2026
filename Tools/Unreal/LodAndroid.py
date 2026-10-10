@@ -63,59 +63,87 @@ def generate_lod1(mesh):
     mesh_lib.set_lods(mesh, options)
 
 
+def read_android_min_lod(mesh):
+    """Relit le Minimum LOD Android."""
+    return mesh.get_minimum_lod_for_platform(unreal.Name("Android"))
+ 
+ 
 def set_android_min_lod(mesh, value):
-    per_platform = mesh.get_editor_property("min_lod")
-    per_platform.set_editor_property("per_platform", {unreal.Name("Android"): value})
-    mesh.set_editor_property("min_lod", per_platform)
-
-
+    """Règle le Minimum LOD Android et vérifie en relisant. Retourne 'A', 'B' ou None si échec."""
+    platform = unreal.Name("Android")
+ 
+    # Tentative A : méthode pour une seule plateforme
+    try:
+        mesh.set_minimum_lod_for_platform(platform, value)
+        if read_android_min_lod(mesh) == value:
+            return "A"
+    except Exception as e:
+        unreal.log_warning("[MinLOD] tentative A échouée : %s" % e)
+ 
+    # Tentative B : méthode pour plusieurs plateformes (dictionnaire)
+    try:
+        mesh.set_minimum_lod_for_platforms({platform: value})
+        if read_android_min_lod(mesh) == value:
+            return "B"
+    except Exception as e:
+        unreal.log_warning("[MinLOD] tentative B échouée : %s" % e)
+ 
+    return None
+ 
+ 
 def main():
     metas = collect_static_meshes()
     unreal.log("[LOD Android] %d Static Meshes trouvés (DRY_RUN=%s)" % (len(metas), DRY_RUN))
-
+ 
     done, skipped, errors = 0, 0, 0
-
+ 
     with unreal.ScopedSlowTask(len(metas), "LOD Android en cours...") as task:
         task.make_dialog(True)
         for data in metas:
             if task.should_cancel():
                 unreal.log_warning("[LOD Android] Annulé par l'utilisateur")
                 break
-
+ 
             name = str(data.package_name)
             task.enter_progress_frame(1, name)
-
+ 
             try:
                 mesh = data.get_asset()
                 if mesh is None:
                     skipped += 1
                     continue
-
+ 
                 if SKIP_NANITE_MESHES and mesh.get_editor_property("nanite_settings").enabled:
                     unreal.log("[SKIP Nanite] " + name)
                     skipped += 1
                     continue
-
+ 
                 lod_count = mesh_lib.get_lod_count(mesh)
                 needs_lods = lod_count < SKIP_IF_LOD_COUNT_AT_LEAST
-
+ 
                 if DRY_RUN:
                     unreal.log("[DRY] %s | LODs actuels: %d | génération LOD1: %s | MinLOD Android = %d"
                                % (name, lod_count, needs_lods, ANDROID_MIN_LOD))
                     done += 1
                     continue
-
+ 
                 if needs_lods:
                     generate_lod1(mesh)
-                set_android_min_lod(mesh, ANDROID_MIN_LOD)
-                asset_lib.save_loaded_asset(mesh)
+                method = set_android_min_lod(mesh, ANDROID_MIN_LOD)
+                if method is None:
+                    errors += 1
+                    unreal.log_warning("[ECHEC MinLOD Android] %s : la valeur n'a pas été prise en compte" % name)
+                    continue
+ 
+                # False = sauvegarder même si l'asset n'est pas marqué comme modifié
+                asset_lib.save_loaded_asset(mesh, False)
                 done += 1
-
+ 
             except Exception as e:
                 errors += 1
                 unreal.log_error("[ERREUR] %s : %s" % (name, e))
-
+ 
     unreal.log("[LOD Android] Terminé : %d traités, %d ignorés, %d erreurs" % (done, skipped, errors))
-
-
+ 
+ 
 main()
