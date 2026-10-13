@@ -14,12 +14,41 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5a708b38-d202-49ab-9a4e-104a63f0a01a" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Config/DefaultEngine.ini" beforeDir="false" afterPath="$PROJECT_DIR$/Config/DefaultEngine.ini" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.Uproject.dir/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Uproject.dir/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Config/DefaultGame.ini" beforeDir="false" afterPath="$PROJECT_DIR$/Config/DefaultGame.ini" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Config/DefaultInput.ini" beforeDir="false" afterPath="$PROJECT_DIR$/Config/DefaultInput.ini" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Assets/ACH/Meshes/Machine_à_coudre/Capture_d’écran_2026-03-21_à_12_55_39_Mat.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Assets/WINNEUSE/Alembic/casque_-anim.uasset" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Content/__ExternalActors__/Scene/CELYA/1/1Y/JVM04UFVVQC8QWYZ3ZWE72.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/__ExternalActors__/Scene/CELYA/1/1Y/JVM04UFVVQC8QWYZ3ZWE72.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/__ExternalActors__/Scene/CELYA/C/KI/3XLDL9M7LE0UTN0CNOFOBH.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/__ExternalActors__/Scene/CELYA/C/KI/3XLDL9M7LE0UTN0CNOFOBH.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/__ExternalActors__/Scene/CELYA/1/LD/IQCU62VPRT235TAFPFPNVI.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/__ExternalActors__/Scene/CELYA/1/LD/IQCU62VPRT235TAFPFPNVI.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/__ExternalActors__/Scene/CELYA/1/VV/2158SJJ5B1OKWUQE7IT7M9.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/__ExternalActors__/Scene/CELYA/1/VV/2158SJJ5B1OKWUQE7IT7M9.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/__ExternalActors__/Scene/CELYA/2/3E/N3BRP2I4Q0KDFMWIWIVG5V.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/__ExternalActors__/Scene/CELYA/2/IR/YM799ZI5OA3BRVL2U9QGM9.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/__ExternalActors__/Scene/CELYA/2/PJ/6TVEFD6YM40DTJ8XHJ0SGV.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/__ExternalActors__/Scene/CELYA/3/6F/UPTY3FKKCIGSSGN8M6RY3A.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/__ExternalActors__/Scene/CELYA/3/FF/HF84UPITUSMIAAMJJAL7HE.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/__ExternalActors__/Scene/CELYA/4/1G/O6874XGN9ATT1W5NSHYU0Z.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/__ExternalActors__/Scene/CELYA/4/1G/O6874XGN9ATT1W5NSHYU0Z.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/__ExternalActors__/Scene/CELYA/4/UI/43C92MIADIRHSBV2TUX7UH.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/__ExternalActors__/Scene/CELYA/4/UI/43C92MIADIRHSBV2TUX7UH.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/__ExternalActors__/Scene/CELYA/5/ZK/14FIII9EAM9UOVP8ZST2YD.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/__ExternalActors__/Scene/CELYA/6/E8/B0SG78EACSZMU8R415J0D9.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/__ExternalActors__/Scene/CELYA/6/E8/B0SG78EACSZMU8R415J0D9.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/__ExternalActors__/Scene/CELYA/7/1B/S5582Q0OACRI5IYFWKMKOK.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/__ExternalActors__/Scene/CELYA/9/1H/HQCMVC0XG27LRN0AOPEJHQ.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/__ExternalActors__/Scene/CELYA/9/E1/H34373EZ11RD67N9NWZPGU.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/__ExternalActors__/Scene/CELYA/9/FR/VOY6TQAW55Q19A7B54VSPW.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/__ExternalActors__/Scene/CELYA/9/FR/VOY6TQAW55Q19A7B54VSPW.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/__ExternalActors__/Scene/CELYA/9/JE/UTM19ISYESFGKQ1EYB4DPW.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/__ExternalActors__/Scene/CELYA/9/TR/0CO3C5SDN1T5EAGLDORHBN.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/__ExternalActors__/Scene/CELYA/9/TR/0CO3C5SDN1T5EAGLDORHBN.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/__ExternalActors__/Scene/CELYA/9/X8/IKXUE2ICD5FKYJ6PX2K1EP.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/__ExternalActors__/Scene/CELYA/A/50/910RLN50HCMQDQVQ7B8NEO.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/__ExternalActors__/Scene/CELYA/A/50/910RLN50HCMQDQVQ7B8NEO.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/__ExternalActors__/Scene/CELYA/A/T5/IJOZMND2BCLAKUKGKGU4WB.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/__ExternalActors__/Scene/CELYA/A/T5/IJOZMND2BCLAKUKGKGU4WB.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/__ExternalActors__/Scene/CELYA/B/7W/HIL76KTARA9IGD4QDHLPJY.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/__ExternalActors__/Scene/CELYA/B/DN/RN10H9JP9Q74337OTRK4TR.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/__ExternalActors__/Scene/CELYA/B/DN/RN10H9JP9Q74337OTRK4TR.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/__ExternalActors__/Scene/CELYA/C/4O/ZZRIUN6YSIY31DUG6K7QG0.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/__ExternalActors__/Scene/CELYA/C/4O/ZZRIUN6YSIY31DUG6K7QG0.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/__ExternalActors__/Scene/CELYA/C/4T/9FK9IN9EMEE9COCCX0RGU3.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/__ExternalActors__/Scene/CELYA/C/OK/YDUH3A3DH72S3ZQ2KK8COF.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/__ExternalActors__/Scene/CELYA/C/OK/YDUH3A3DH72S3ZQ2KK8COF.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/__ExternalActors__/Scene/CELYA/C/QA/2X1QYK2XFII32868QW2H9Q.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/__ExternalActors__/Scene/CELYA/C/QA/2X1QYK2XFII32868QW2H9Q.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/__ExternalActors__/Scene/CELYA/D/2Y/RLOSEVFVO8XOWXGC1QUF3T.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/__ExternalActors__/Scene/CELYA/D/2Y/RLOSEVFVO8XOWXGC1QUF3T.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/__ExternalActors__/Scene/CELYA/D/96/FB1P4RGD4TCM3SD6UK98L1.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/__ExternalActors__/Scene/CELYA/E/C7/027ITE7PCZEHONE1JJH5AY.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/__ExternalActors__/Scene/CELYA/E/FH/9IHF7G72MI4UHHF3EV8FEW.uasset" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Uproject.uproject" beforeDir="false" afterPath="$PROJECT_DIR$/Uproject.uproject" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -46,12 +75,14 @@
   }
 }</component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="file://$PROJECT_DIR$/../../../../../../Unreals/UE_5.6/Engine/Source/Runtime/CoreUObject/Public/UObject/UObjectBaseUtility.h" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/../../../../../../Unreals/UE_5.6/Engine/Source/Runtime/Engine/Classes/GameFramework/Actor.h" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Uproject.uproject" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="McpProjectServerCommands">
     <commands />
     <urls />
+  </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
   </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 6,
@@ -62,30 +93,32 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.MCP Project settings loaded&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.cidr.known.project.marker&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.readMode.enableVisualFormatting&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.typescript.service.memoryLimit.init&quot;: &quot;true&quot;,
-    &quot;Uproject.Uproject.executor&quot;: &quot;Run&quot;,
-    &quot;cidr.known.project.marker&quot;: &quot;true&quot;,
-    &quot;codeWithMe.voiceChat.enabledByDefault&quot;: &quot;false&quot;,
-    &quot;com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;TempToFinal&quot;,
-    &quot;junie.onboarding.icon.badge.shown&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;to.speed.mode.migration.done&quot;: &quot;true&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RunOnceActivity.MCP Project settings loaded": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.cidr.known.project.marker": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "RunOnceActivity.readMode.enableVisualFormatting": "true",
+    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
+    "Uproject.Uproject.executor": "Run",
+    "cidr.known.project.marker": "true",
+    "codeWithMe.voiceChat.enabledByDefault": "false",
+    "com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1": "true",
+    "git-widget-placeholder": "TempToFinal",
+    "junie.onboarding.icon.badge.shown": "true",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "rider.unittesting.toolwindow.stripe.button.shown": "true",
+    "settings.editor.selected.configurable": "preferences.environmentSetup",
+    "to.speed.mode.migration.done": "true",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RunManager">
     <configuration name="Uproject" type="Uproject" factoryName="rider.uproject">
       <configuration_1 setup="1">
@@ -192,6 +225,71 @@
         <option name="TERMINAL_INTERACTION_BEHAVIOR" value="FORCE_CONSOLE" />
         <option name="PROJECT_FILE_PATH" value="$PROJECT_DIR$/Uproject.uproject" />
       </configuration_8>
+      <configuration_9 setup="1">
+        <option name="CONFIGURATION" value="DebugGame Editor" />
+        <option name="PLATFORM" value="Mac" />
+        <option name="CURRENT_LAUNCH_PROFILE" value="Local" />
+        <option name="EXECUTABLE_PATH" value="$PROJECT_DIR$/../../../Shared/Epic Games/UE_5.6/Engine/Binaries/Mac/UnrealEditor-Mac-DebugGame.app/Contents/MacOS/UnrealEditor-Mac-DebugGame" />
+        <option name="MANDATORY_PROGRAM_PARAMETERS" value=" &quot;$PROJECT_DIR$/Uproject.uproject&quot;" />
+        <option name="CUSTOM_PROGRAM_PARAMETERS" value="" />
+        <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/../../../Shared/Epic Games/UE_5.6" />
+        <option name="PASS_PARENT_ENVS" value="1" />
+        <option name="USE_EXTERNAL_CONSOLE" value="0" />
+        <option name="TERMINAL_INTERACTION_BEHAVIOR" value="FORCE_CONSOLE" />
+        <option name="PROJECT_FILE_PATH" value="$PROJECT_DIR$/Uproject.uproject" />
+      </configuration_9>
+      <configuration_10 setup="1">
+        <option name="CONFIGURATION" value="DebugGame" />
+        <option name="PLATFORM" value="Mac" />
+        <option name="CURRENT_LAUNCH_PROFILE" value="Local" />
+        <option name="EXECUTABLE_PATH" value="$PROJECT_DIR$/Binaries/Mac/Uproject-Mac-DebugGame.app/Contents/MacOS/Uproject-Mac-DebugGame" />
+        <option name="MANDATORY_PROGRAM_PARAMETERS" value="" />
+        <option name="CUSTOM_PROGRAM_PARAMETERS" value="" />
+        <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/../../../Shared/Epic Games/UE_5.6" />
+        <option name="PASS_PARENT_ENVS" value="1" />
+        <option name="USE_EXTERNAL_CONSOLE" value="0" />
+        <option name="TERMINAL_INTERACTION_BEHAVIOR" value="FORCE_CONSOLE" />
+        <option name="PROJECT_FILE_PATH" value="$PROJECT_DIR$/Uproject.uproject" />
+      </configuration_10>
+      <configuration_11 setup="1">
+        <option name="CONFIGURATION" value="Development Editor" />
+        <option name="PLATFORM" value="Mac" />
+        <option name="CURRENT_LAUNCH_PROFILE" value="Local" />
+        <option name="EXECUTABLE_PATH" value="$PROJECT_DIR$/../../../Shared/Epic Games/UE_5.6/Engine/Binaries/Mac/UnrealEditor.app/Contents/MacOS/UnrealEditor" />
+        <option name="MANDATORY_PROGRAM_PARAMETERS" value=" &quot;$PROJECT_DIR$/Uproject.uproject&quot;" />
+        <option name="CUSTOM_PROGRAM_PARAMETERS" value="" />
+        <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/../../../Shared/Epic Games/UE_5.6" />
+        <option name="PASS_PARENT_ENVS" value="1" />
+        <option name="USE_EXTERNAL_CONSOLE" value="0" />
+        <option name="TERMINAL_INTERACTION_BEHAVIOR" value="FORCE_CONSOLE" />
+        <option name="PROJECT_FILE_PATH" value="$PROJECT_DIR$/Uproject.uproject" />
+      </configuration_11>
+      <configuration_12 setup="1">
+        <option name="CONFIGURATION" value="Development" />
+        <option name="PLATFORM" value="Mac" />
+        <option name="CURRENT_LAUNCH_PROFILE" value="Local" />
+        <option name="EXECUTABLE_PATH" value="$PROJECT_DIR$/Binaries/Mac/Uproject.app/Contents/MacOS/Uproject" />
+        <option name="MANDATORY_PROGRAM_PARAMETERS" value="" />
+        <option name="CUSTOM_PROGRAM_PARAMETERS" value="" />
+        <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/../../../Shared/Epic Games/UE_5.6" />
+        <option name="PASS_PARENT_ENVS" value="1" />
+        <option name="USE_EXTERNAL_CONSOLE" value="0" />
+        <option name="TERMINAL_INTERACTION_BEHAVIOR" value="FORCE_CONSOLE" />
+        <option name="PROJECT_FILE_PATH" value="$PROJECT_DIR$/Uproject.uproject" />
+      </configuration_12>
+      <configuration_13 setup="1">
+        <option name="CONFIGURATION" value="Shipping" />
+        <option name="PLATFORM" value="Mac" />
+        <option name="CURRENT_LAUNCH_PROFILE" value="Local" />
+        <option name="EXECUTABLE_PATH" value="$PROJECT_DIR$/Binaries/Mac/Uproject-Mac-Shipping.app/Contents/MacOS/Uproject-Mac-Shipping" />
+        <option name="MANDATORY_PROGRAM_PARAMETERS" value="" />
+        <option name="CUSTOM_PROGRAM_PARAMETERS" value="" />
+        <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/../../../Shared/Epic Games/UE_5.6" />
+        <option name="PASS_PARENT_ENVS" value="1" />
+        <option name="USE_EXTERNAL_CONSOLE" value="0" />
+        <option name="TERMINAL_INTERACTION_BEHAVIOR" value="FORCE_CONSOLE" />
+        <option name="PROJECT_FILE_PATH" value="$PROJECT_DIR$/Uproject.uproject" />
+      </configuration_13>
       <option name="DEFAULT_PROJECT_PATH" value="$PROJECT_DIR$/Uproject.uproject" />
       <option name="PROJECT_FILE_PATH" value="$PROJECT_DIR$/Uproject.uproject" />
       <option name="AUTO_SELECT_PRIORITY" value="10010" />
@@ -240,5 +338,9 @@
         </breakpoint>
       </breakpoints>
     </breakpoint-manager>
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
   </component>
 </project>

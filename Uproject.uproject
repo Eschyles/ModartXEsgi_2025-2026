@@ -12,6 +12,10 @@
 	],
 	"Plugins": [
 		{
+			"Name": "XRBase",
+			"Enabled": true
+		},
+		{
 			"Name": "ModelingToolsEditorMode",
 			"Enabled": true,
 			"TargetAllowList": [
@@ -24,7 +28,9 @@
 			"SupportedTargetPlatforms": [
 				"Win64",
 				"Linux",
-				"Android"
+				"LinuxArm64",
+				"Android",
+				"VisionOS"
 			]
 		},
 		{
@@ -50,6 +56,11 @@
 				"Win64",
 				"Android",
 				"Linux"
+			],
+			"PlatformAllowList": [
+				"Win64",
+				"Android",
+				"Linux"
 			]
 		},
 		{
@@ -57,6 +68,10 @@
 			"Enabled": true,
 			"MarketplaceURL": "com.epicgames.launcher://ue/marketplace/product/7ce814580ba341b4bb5865983fea9d31",
 			"SupportedTargetPlatforms": [
+				"Win64",
+				"Android"
+			],
+			"PlatformAllowList": [
 				"Win64",
 				"Android"
 			]
