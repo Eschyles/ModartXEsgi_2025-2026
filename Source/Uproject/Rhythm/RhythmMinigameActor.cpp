@@ -820,6 +820,7 @@ void ARhythmMinigameActor::SpawnButtonActors()
 			ButtonActor->ButtonMeshComponent->SetCollisionResponseToAllChannels(ECR_Ignore);
 			ButtonActor->ButtonMeshComponent->SetGenerateOverlapEvents(false);
 		}
+		ButtonActor->OwnerMinigame = this;
 		ButtonActor->ConfigureButton(LaneIndex, GetLaneColor(LaneIndex));
 
 		SpawnedButtons.Add(ButtonActor);

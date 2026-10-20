@@ -1,4 +1,5 @@
 #include "RhythmButtonActor.h"
+#include "RhythmMinigameActor.h"
 
 #include "Components/SceneComponent.h"
 #include "Components/StaticMeshComponent.h"
@@ -9,15 +10,17 @@
 ARhythmButtonActor::ARhythmButtonActor()
 {
 	PrimaryActorTick.bCanEverTick = false;
-	SetActorEnableCollision(false);
+	SetActorEnableCollision(true);
 
 	SceneRoot = CreateDefaultSubobject<USceneComponent>(TEXT("SceneRoot"));
 	SetRootComponent(SceneRoot);
 
 	ButtonMeshComponent = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("ButtonMeshComponent"));
 	ButtonMeshComponent->SetupAttachment(SceneRoot);
-	ButtonMeshComponent->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+	// Collision de requete uniquement : le bouton peut etre vise par un line trace (canal Visibility).
+	ButtonMeshComponent->SetCollisionEnabled(ECollisionEnabled::QueryOnly);
 	ButtonMeshComponent->SetCollisionResponseToAllChannels(ECR_Ignore);
+	ButtonMeshComponent->SetCollisionResponseToChannel(ECC_Visibility, ECR_Block);
 	ButtonMeshComponent->SetGenerateOverlapEvents(false);
 
 	static ConstructorHelpers::FObjectFinder<UStaticMesh> CylinderMesh(TEXT("/Engine/BasicShapes/Cylinder.Cylinder"));
@@ -34,10 +37,6 @@ void ARhythmButtonActor::BeginPlay()
 
 	if (ButtonMeshComponent)
 	{
-		SetActorEnableCollision(false);
-		ButtonMeshComponent->SetCollisionEnabled(ECollisionEnabled::NoCollision);
-		ButtonMeshComponent->SetCollisionResponseToAllChannels(ECR_Ignore);
-		ButtonMeshComponent->SetGenerateOverlapEvents(false);
 		InitialMeshLocation = ButtonMeshComponent->GetRelativeLocation();
 		InitialMeshScale = ButtonMeshComponent->GetRelativeScale3D();
 	}
@@ -46,14 +45,25 @@ void ARhythmButtonActor::BeginPlay()
 void ARhythmButtonActor::ConfigureButton(int32 InLane, FLinearColor InColor)
 {
 	Lane = InLane;
-	SetActorEnableCollision(false);
+	SetActorEnableCollision(true);
 	if (ButtonMeshComponent)
 	{
-		ButtonMeshComponent->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+		ButtonMeshComponent->SetCollisionEnabled(ECollisionEnabled::QueryOnly);
 		ButtonMeshComponent->SetCollisionResponseToAllChannels(ECR_Ignore);
+		ButtonMeshComponent->SetCollisionResponseToChannel(ECC_Visibility, ECR_Block);
 		ButtonMeshComponent->SetGenerateOverlapEvents(false);
 	}
 	SetVisualColor(InColor);
+}
+
+void ARhythmButtonActor::Interact()
+{
+	// La lane est fixee au spawn (ConfigureButton) a partir de la meme valeur que celle utilisee pour
+	// placer le bouton : la note jouee correspond donc toujours a la position du bouton.
+	if (OwnerMinigame)
+	{
+		OwnerMinigame->HandleLaneInput(Lane);
+	}
 }
 
 void ARhythmButtonActor::PulseButton(ERhythmHitRating Rating)

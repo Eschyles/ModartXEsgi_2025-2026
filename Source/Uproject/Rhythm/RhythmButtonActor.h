@@ -6,6 +6,7 @@
 #include "RhythmButtonActor.generated.h"
 
 class UStaticMeshComponent;
+class ARhythmMinigameActor;
 
 UCLASS(Blueprintable)
 class UPROJECT_API ARhythmButtonActor : public AActor
@@ -23,6 +24,10 @@ public:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Rhythm")
 	int32 Lane = 0;
+
+	// Minigame qui a spawn ce bouton (renseigne par ARhythmMinigameActor::SpawnButtonActors).
+	UPROPERTY(Transient, BlueprintReadOnly, Category = "Rhythm")
+	TObjectPtr<ARhythmMinigameActor> OwnerMinigame = nullptr;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Rhythm")
 	ERhythmHitRating LastRating = ERhythmHitRating::None;
@@ -44,6 +49,14 @@ public:
 
 	UFUNCTION(BlueprintCallable, Category = "Rhythm")
 	void ConfigureButton(int32 InLane, FLinearColor InColor);
+
+	// A appeler quand le joueur vise ce bouton et declenche l'interaction (VR).
+	// Declenche la lane de ce bouton dans le minigame.
+	UFUNCTION(BlueprintCallable, Category = "Rhythm")
+	void Interact();
+
+	UFUNCTION(BlueprintPure, Category = "Rhythm")
+	int32 GetLane() const { return Lane; }
 
 	UFUNCTION(BlueprintCallable, Category = "Rhythm")
 	void PulseButton(ERhythmHitRating Rating);
